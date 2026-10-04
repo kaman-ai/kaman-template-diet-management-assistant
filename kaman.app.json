@@ -1,76 +1,26 @@
 {
   "name": "Diet Management Agent",
   "agents": {
-    "plan_keeper": "faf34493-4bf1-5176-ae2a-45d5424a7cba",
-    "diet_coach": "7cbb9b8d-b86b-574b-89a5-03f02d733e77"
+    "plan_keeper": "0e6a692a-2a83-5e96-bdf5-61aeb6805c3e",
+    "diet_coach": "e2a25808-af9b-5c6d-96af-9d501f1d5d12"
   },
   "workflows": {
-    "flow": "9481e2d1-0f8a-5edd-8ab0-ec262461920f"
+    "flow": "3b69c71d-3b31-5c94-86f8-2456323a5efe"
+  },
+  "scenarios": {
+    "desk": "c45bd9fa-6f09-5e13-8692-551678ddc66a"
   },
   "ui": {
     "title": "Diet Management Agent",
     "tagline": "A diet coach patients can talk to: it knows their targets, conditions, allergies and preferences, reviews their food log, and builds weekly meal plans through an attached workflow that checks calories, sodium, carbohydrates and allergens in code - every plan for a patient with a medical condition is approved by a dietitian before the patient sees it.",
-    "actions": [
-      {
-        "id": "run",
-        "label": "Run: Weekly meal plan",
-        "description": "Run by the diet coach. Kaman drafts a week's meal plan from the patient's targets, conditions, allergies and preferences, checks calories, sodium, carbohydrate per meal and allergens in code, sends any plan for a patient with a medical condition - or one that fails a check - to a dietitian, and shares it with the patient once approved.",
-        "kind": "workflow",
-        "target": "flow",
-        "inputs": [
-          {
-            "name": "patient_id",
-            "label": "Patient id",
-            "kind": "text",
-            "default": "PT-2210"
-          },
-          {
-            "name": "kcal_target",
-            "label": "Kcal target",
-            "kind": "number",
-            "default": 1800
-          },
-          {
-            "name": "conditions",
-            "label": "Conditions",
-            "kind": "json",
-            "default": [
-              "type 2 diabetes",
-              "hypertension"
-            ]
-          },
-          {
-            "name": "allergies",
-            "label": "Allergies",
-            "kind": "json",
-            "default": [
-              "peanut"
-            ]
-          },
-          {
-            "name": "preferences",
-            "label": "Preferences",
-            "kind": "text",
-            "default": "vegetarian, South Indian home cooking"
-          }
-        ]
-      },
-      {
-        "id": "ask",
-        "label": "Ask the Meal Plan Keeper",
-        "description": "Records a meal plan as a FHIR NutritionOrder and shares it with the patient.",
-        "kind": "agent",
-        "target": "plan_keeper",
-        "prompt": "{{question}}",
-        "inputs": [
-          {
-            "name": "question",
-            "label": "Your question",
-            "kind": "text",
-            "default": "Task: Save and share the approved plan for PT-2210."
-          }
-        ]
-      }
-    ]
+    "run": "Run: Weekly meal plan",
+    "chat": {
+      "agent": "diet_coach",
+      "title": "Ask the Diet Coach",
+      "suggestions": [
+        "I'm vegetarian with type 2 diabetes. Is a plate of white rice with sambar a good lunch?",
+        "How did I do with my meals yesterday?"
+      ]
+    }
   }
 }
